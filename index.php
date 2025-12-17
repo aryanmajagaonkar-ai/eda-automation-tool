@@ -442,7 +442,7 @@
             });
         });
 
-        const FLASK_URL = 'http://localhost:5000';
+        const FLASK_URL = 'https://eda-automation-tool.onrender.com';
         const sessionId = Date.now().toString();
         let currentData = {};
         let isConnected = false;

@@ -21,6 +21,13 @@ from sklearn.decomposition import PCA
 import scipy.stats as stats
 import os
 
+BASE_TMP_DIR = "/tmp/eda_tool"
+UPLOAD_FOLDER = os.path.join(BASE_TMP_DIR, "uploads")
+PLOTS_FOLDER = os.path.join(BASE_TMP_DIR, "plots")
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(PLOTS_FOLDER, exist_ok=True)
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 app.secret_key = "your-secret-key-change-this-in-production"
@@ -63,10 +70,6 @@ def health_check():
     )
 
 
-if __name__ == "__main__":
-    app.run()
-
-
 @app.route("/", methods=["GET"])
 def home():
     """Root endpoint"""
@@ -91,6 +94,7 @@ def home():
 @app.route("/upload_csv", methods=["POST"])
 def upload_csv():
     """Step 1: Upload and initial processing"""
+
     try:
         logging.info("Received upload request")
 
@@ -104,7 +108,11 @@ def upload_csv():
         logging.info(f"Processing file: {file.filename}")
 
         # Read CSV
-        df = pd.read_csv(file)
+        filename = file.filename
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+        df = pd.read_csv(filepath)
+
         logging.info(f"CSV loaded: {df.shape}")
 
         # Initial cleaning
@@ -582,13 +590,3 @@ def download_data():
     except Exception as e:
         logging.error(f"Download error: {e}")
         return jsonify({"error": str(e)}), 500
-
-
-if __name__ == "__main__":
-    print("=" * 60)
-    print("🚀 EDA Flask Server Starting...")
-    print("=" * 60)
-    print("Server URL: http://localhost:5000")
-    print("Health Check: http://localhost:5000/health")
-    print("=" * 60)
-    app.run(debug=True, host="0.0.0.0", port=5000)
