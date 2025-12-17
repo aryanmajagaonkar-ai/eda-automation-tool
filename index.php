@@ -223,9 +223,8 @@
             <strong>⚠️ Connection Error!</strong>
             <p>Cannot connect to Flask backend. Please ensure:</p>
             <ul>
-                <li>Flask server is running: <code>python app.py</code></li>
-                <li>Server is running on: <code>http://localhost:5000</code></li>
-                <li>No firewall blocking the connection</li>
+                <li>Flask backend is running on Render</li>
+                <li>Service may take 30–60 seconds to wake up</li>
             </ul>
             <button class="btn btn-sm btn-warning" onclick="checkConnection()">Retry Connection</button>
         </div>
