@@ -63,11 +63,6 @@ def health_check():
     )
 
 
-@app.route("/")
-def home():
-    return "App running on Render!"
-
-
 if __name__ == "__main__":
     app.run()
 
