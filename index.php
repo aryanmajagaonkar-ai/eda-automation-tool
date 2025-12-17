@@ -462,23 +462,34 @@
             try {
                 const response = await fetch(`${FLASK_URL}/health`, {
                     method: 'GET',
-                    signal: AbortSignal.timeout(5000) // 5 second timeout
+                    mode: 'cors'
                 });
+
+                if (!response.ok) throw new Error('Backend not ready');
+
+                const data = await response.json();
                 
-                if (response.ok) {
+                if (data.status === 'ok') {
                     isConnected = true;
                     statusDot.className = 'status-dot connected';
-                    statusText.textContent = 'Connected';
+                    statusText.textContent = 'Connected to Flask(Render)';
                     connectionAlert.style.display = 'none';
                 } else {
-                    throw new Error('Server responded with error');
+                    throw new Error('Invalid Response');
                 }
             } catch (error) {
+                console.error('Connection check failed:', error);
+
                 isConnected = false;
                 statusDot.className = 'status-dot disconnected';
-                statusText.textContent = 'Disconnected';
+                statusText.textContent = 'Backend sleeping / starting';
                 connectionAlert.style.display = 'block';
-                console.error('Connection check failed:', error);
+                
+                connectionAlert.innerHTML = `
+                    <strong>⚠️ Backend is waking up</strong><br>
+                    Render free services sleep after inactivity.<br>
+                    Please wait 30–60 seconds and refresh.
+                `;
             }
         }
         
@@ -506,7 +517,7 @@
             
             // Check connection first
             if (!isConnected) {
-                alert('⚠️ Not connected to Flask server. Please start the server and retry.');
+                alert('❌ Cannot connect to backend. Please wait 30–60 seconds and retry (Render free tier sleeps).');
                 await checkConnection();
                 return;
             }
@@ -541,7 +552,7 @@
                 if (error.name === 'TimeoutError') {
                     alert('⏱️ Request timed out. The file might be too large or server is slow.');
                 } else if (error.message.includes('Failed to fetch')) {
-                    alert('❌ Connection error! Please ensure Flask server is running on http://localhost:5000');
+                    alert('❌ Backend not reachable. Please wait 30–60 seconds and try again.');
                     await checkConnection();
                 } else {
                     alert('Error: ' + error.message);
