@@ -1,0 +1,107 @@
+/* -----------------------------------
+Global Styles
+-------------------------------------- */
+body {
+font-family: 'Inter', sans-serif;
+background: #f5f7fb;
+margin: 0;
+padding: 0;
+color: #222;
+}
+
+.container {
+max-width: 900px;
+margin: auto;
+padding: 40px 20px;
+}
+
+/* -----------------------------------
+Card Style
+-------------------------------------- */
+.card {
+background: #ffffff;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+margin-bottom: 25px;
+}
+
+/* -----------------------------------
+Headings
+-------------------------------------- */
+h1 {
+text-align: center;
+font-size: 28px;
+font-weight: 700;
+margin-bottom: 25px;
+}
+
+h2 {
+margin-top: 25px;
+font-weight: 600;
+}
+
+/* -----------------------------------
+Upload Form
+-------------------------------------- */
+label {
+font-weight: 600;
+margin-top: 10px;
+display: block;
+}
+
+input[type="file"],
+select {
+width: 100%;
+padding: 12px;
+margin-top: 6px;
+border: 1px solid #ccc;
+border-radius: 8px;
+background: #fff;
+}
+
+/* -----------------------------------
+Buttons
+-------------------------------------- */
+button {
+margin-top: 20px;
+padding: 12px 20px;
+background: #0066ff;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+width: 100%;
+font-size: 16px;
+font-weight: 600;
+transition: 0.2s;
+}
+
+button:hover {
+background: #004ccc;
+}
+
+/* -----------------------------------
+Status Message
+-------------------------------------- */
+#status {
+margin-top: 15px;
+font-size: 16px;
+font-weight: 600;
+color: #0066cc;
+}
+
+/* -----------------------------------
+Results Section
+-------------------------------------- */
+#results {
+margin-top: 30px;
+}
+
+.plot-image {
+width: 100%;
+max-width: 100%;
+border-radius: 10px;
+margin-top: 20px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
