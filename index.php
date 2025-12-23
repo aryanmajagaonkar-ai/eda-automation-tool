@@ -531,7 +531,6 @@
                 const response = await fetch(`${FLASK_URL}/upload_csv`, {
                     method: 'POST',
                     body: formData,
-                    signal: AbortSignal.timeout(30000) // 30 second timeout
                 });
                 
                 if (!response.ok) {
@@ -607,7 +606,7 @@
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({session_id: sessionId}),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
@@ -654,7 +653,7 @@
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(payload),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
@@ -691,7 +690,7 @@
                         session_id: sessionId,
                         method: method
                     }),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
@@ -717,7 +716,7 @@
                         session_id: sessionId,
                         workflow: workflow
                     }),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
@@ -780,7 +779,7 @@
                         session_id: sessionId,
                         target_column: target
                     }),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
 
                 const data = await response.json();
@@ -833,7 +832,7 @@
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
-                    signal: AbortSignal.timeout(20000)
+                    signal: AbortSignal.timeout(60000)
                 });
 
                 const data = await response.json();
@@ -909,7 +908,7 @@
                         x_column: document.getElementById('xColumn').value,
                         y_column: document.getElementById('yColumn').value
                     }),
-                    signal: AbortSignal.timeout(20000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
@@ -934,7 +933,7 @@
                         session_id: sessionId,
                         file_type: fileType
                     }),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(60000)
                 });
                 const data = await response.json();
                 
